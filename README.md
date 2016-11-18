@@ -1,1 +1,0 @@
-Segédprogramok a Biometria gyakorlathoz
