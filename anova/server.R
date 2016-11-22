@@ -42,18 +42,15 @@ shinyServer(function(input,output){
   
   output$stats <- renderPrint({
     print(summary(m <- aov(value~group, data=data())))
-    if (input$sampNum != 2 && summary(m)[[1]][["Pr(>F)"]][1] < .05) {
-      cat('\n')
-      print(TukeyHSD(m))
-    }
     if (input$sampNum == 2) {
       cat("", "Két minta esetén ellenőrizheted, hogy a t-próba ugyanazt az eredmény adja:",sep='\n')
       t.test(value~group, data=data(), var.equal=T)
-      
     }
   })
   
   output$stats2 <- renderPrint({
-    
+    if (input$sampNum != 2 && summary(aov(value~group, data=data()))[[1]][["Pr(>F)"]][1] < input$alpha/100) {
+      print(TukeyHSD(aov(value~group, data=data())))
+    }
   })
 })

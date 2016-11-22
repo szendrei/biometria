@@ -11,7 +11,10 @@ shinyUI(fluidPage(
     ),
     mainPanel(
       plotOutput("plot"),
-      verbatimTextOutput("stats")
+      sliderInput("alpha",label="α értéke:",min=1,max=100,value=5,post="%"),
+      verbatimTextOutput("stats"),
+      helpText("Post-hoc teszt eredménye (ha van):"),
+      verbatimTextOutput("stats2")
     )
   )
 ))
