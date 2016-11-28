@@ -1,17 +1,17 @@
 library(shiny)
 
 shinyUI(fluidPage(
-  titlePanel("Kruskal-Wallis teszt"),
+  titlePanel("Kruskal-Wallis próba"),
   sidebarLayout(
     sidebarPanel(
-      # adatok bevitele
-      # tabokon: R-ből olvas, fájlból olvas, manuális
-      # ha manuális: plusz iconos gombocska, hogy több adat (lásd ANOVA a több input kezelésére)
+      sliderInput("sampNum",label="Minták száma:",min=2,max=10,value=4),
+      sliderInput("length",label="Minták elemszáma:",min=3,max=50,value=30),
+      uiOutput("sliders")
     ),
     mainPanel(
-      # plot
-      # stats: kw teszt
-      # ha szignifikáns: dunn test
+      plotOutput("plot"),
+      sliderInput("alpha",label="α értéke:",min=1,max=100,value=5,post="%"),
+      verbatimTextOutput("stats")
     )
   )
 ))
